@@ -165,6 +165,10 @@ func (r *AlertingRule) Eval(ctx context.Context, ts time.Time, engine *promql.En
 		return nil, err
 	}
 
+	//AlertTestRules processing
+	res = appendTestRes(ctx, r.name, ts, engine, res)
+	//End of AlertTestRules processing
+
 	r.mtx.Lock()
 	defer r.mtx.Unlock()
 
